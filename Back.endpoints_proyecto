@@ -1,0 +1,725 @@
+{
+  "info": {
+    "_postman_id": "d74de1bc-1dff-418f-8315-c3fd2a039880",
+    "name": "Back",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "48916878",
+    "_collection_link": "https://go.postman.co/collection/48916878-d74de1bc-1dff-418f-8315-c3fd2a039880?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "guardar usuario",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nombres\":\"pablo pabon\",\r\n    \"apellidos\":\"soto pabon\",\r\n    \"tipoDocumento\":\"CEDULA\",\r\n    \"documento\":\"1022143871\",\r\n    \"correo\":\"kevingamboamosquera@gmail.com\",\r\n    \"telefono\":\"3215851271\",\r\n    \"nacimiento\":\"2006-06-12\",\r\n    \"rol\":\"CLIENTE\",\r\n    \"direccion\":\"calle 43a #57-23\",\r\n    \"contrasena\":\"Medellin.5\",\r\n    \"cuentasBancarias\":[\r\n        \r\n    ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/usuarios/guardar/cliente",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "usuarios",
+            "guardar",
+            "cliente"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "actualizar datos",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"telefono\":\"3215851275\", \r\n    \"nombres\":\"leonsito\",\r\n    \"apellidos\":\"mosquita\",\r\n    \"correo\":\"kev@gmail.com\",\r\n    \"direccion\":\"sapa\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/usuarios/actualizar/398e6e54-add5-4882-9208-374210f3e2b8",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "usuarios",
+            "actualizar",
+            "398e6e54-add5-4882-9208-374210f3e2b8"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "cambiar contraseña",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\":\"398e6e54-add5-4882-9208-374210f3e2b8\",\r\n    \"contrasenaVieja\":\"Medellin.5\",\r\n    \"contrasenaNueva\":\"alsdhabfkabssfnas\"\r\n\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/usuarios/actualizarContrasena",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "usuarios",
+            "actualizarContrasena"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "guardar producto",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nombre\":\"pantalon 1\",\r\n    \"precio\":10000,\r\n    \"stock\":[\r\n        {\r\n            \"talla\":\"xl\",\r\n            \"cantidad\":20,\r\n            \"color\":\"negro\"\r\n        },\r\n        {\r\n            \"talla\":\"m\",\r\n            \"cantidad\":10,\r\n            \"color\":\"negro\"\r\n        },\r\n        {\r\n            \"talla\":\"xs\",\r\n            \"cantidad\":12,\r\n            \"color\":\"amarillo\"\r\n        },\r\n        {\r\n            \"talla\":\"m\",\r\n            \"cantidad\":15,\r\n            \"color\":\"amarillo\"\r\n        }\r\n    ],\r\n    \"categorias\":[\"PANTALON\", \"VINTAGE\"]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/productos/guardar",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "productos",
+            "guardar"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "generar orden",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/ordenes/guardar/96d01b2a-5f78-4a9b-90c4-e2f634768a71",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "ordenes",
+            "guardar",
+            "96d01b2a-5f78-4a9b-90c4-e2f634768a71"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "agregar producto a carrito",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"cantidad\":11,\r\n    \"idStock\":\"b8b43671-cac7-4102-a22c-805da9b23372\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/carrito/guardar/ref-0",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "carrito",
+            "guardar",
+            "ref-0"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "consultar usuarios",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nombres\":\"pab\",\r\n    \"apellidos\":\"\",\r\n    \"correo\":\"\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/usuarios/listar",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "usuarios",
+            "listar"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "actualizar cuenta bancaria",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nombreBanco\":\"nequi\",\r\n    \"cuenta\":\"123123456\",\r\n    \"tipoCuenta\":\"credito\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/cuentasBancarias/actualizar/a6fbe602-804c-4812-9fe2-e787cf7e222b",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "cuentasBancarias",
+            "actualizar",
+            "a6fbe602-804c-4812-9fe2-e787cf7e222b"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "eliminar cuenta bancaria",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/cuentasBancarias/eliminar/9d73a1d1-da99-4d5f-a9ca-1f9418c7a095",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "cuentasBancarias",
+            "eliminar",
+            "9d73a1d1-da99-4d5f-a9ca-1f9418c7a095"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "guardar cuentas bancarias",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "[{\r\n            \"nombreBanco\":\"Bancolombia\",\r\n            \"cuenta\":\"123123153\",\r\n            \"tipoCuenta\":\"debito\"\r\n        }\r\n]",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/cuentasBancarias/guardar/27107b2b-b4ad-453b-8307-fbcc51339e7b",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "cuentasBancarias",
+            "guardar",
+            "27107b2b-b4ad-453b-8307-fbcc51339e7b"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "actualizar carrito",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\":\"21275fd3-ecc4-483b-96e4-56361351bd23\",\r\n    \"cantidad\":10\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/carrito/actualizar",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "carrito",
+            "actualizar"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "eliminar producto de carrito",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/carrito/eliminar/43be9eec-91af-4a39-b51d-21a4cfe7612e",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "carrito",
+            "eliminar",
+            "43be9eec-91af-4a39-b51d-21a4cfe7612e"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "guardar un descuento",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"descuento\":60,\r\n    \"tipoDescuento\":\"temporada\",\r\n    \"razon\":\"cumpleaños\",\r\n    \"inicio\":\"2026-06-08T08:30:00\",\r\n    \"fin\":\"2026-06-08T08:50:00\",\r\n    \"objetivo\":\"PRENDA\",\r\n    \"idObjetivo\":\"96fd055f-0fb9-4fdd-8cb7-b16df542516e\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/descuentos/crearDescuento",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "descuentos",
+            "crearDescuento"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "guardar orden",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/ordenes/crearOrden/ref-0",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "ordenes",
+            "crearOrden",
+            "ref-0"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "cambiar estado",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"referencia\":\"ref-1\",\r\n    \"estado\":\"creada\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/ordenes/cambiarEstado",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "ordenes",
+            "cambiarEstado"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "cambiar activacion",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"descuento\":0.3,\r\n    \"tipoDescuento\":\"\",\r\n    \"razon\":\"cumpleaños\",\r\n    \"inicio\":\"\",\r\n    \"fin\":\"\",\r\n    \"objetivo\":\"\",\r\n    \"idObjetivo\":\"\"\r\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/descuentos/cambiarActivacion/40dccc92-4f2c-4810-852e-4c5208f65608",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "descuentos",
+            "cambiarActivacion",
+            "40dccc92-4f2c-4810-852e-4c5208f65608"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "actualizar descuento",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\":\"40dccc92-4f2c-4810-852e-4c5208f65608\",\r\n    \"descuento\":40,\r\n    \"razon\":\"salida\",\r\n    \"inicio\":\"2026-06-12T14:30:00\",\r\n    \"fin\":\"2026-06-13T14:30:00\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/descuentos/actualizarDescuento",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "descuentos",
+            "actualizarDescuento"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "crear Stock",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "[\r\n        {\r\n            \"talla\":\"xl\",\r\n            \"cantidad\":20,\r\n            \"color\":\"azul\"\r\n        },\r\n        {\r\n            \"talla\":\"m\",\r\n            \"cantidad\":10,\r\n            \"color\":\"azul\"\r\n        }\r\n    ]",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/stock/guardar/c7212305-703c-4811-8f2d-d9377cea0422",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "stock",
+            "guardar",
+            "c7212305-703c-4811-8f2d-d9377cea0422"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "eliminar stock",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "[\r\n        {\r\n            \"talla\":\"xl\",\r\n            \"cantidad\":20,\r\n            \"color\":\"azul\"\r\n        },\r\n        {\r\n            \"talla\":\"m\",\r\n            \"cantidad\":10,\r\n            \"color\":\"azul\"\r\n        }\r\n    ]"
+        },
+        "url": {
+          "raw": "http://localhost:8080/stock/eliminar/729b1679-83e2-4595-8d68-ada7ff334d83",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "stock",
+            "eliminar",
+            "729b1679-83e2-4595-8d68-ada7ff334d83"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "actualizar cantidad stock",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "[\r\n    {\r\n        \"idStock\":\"7dbe8a45-21b0-4d44-9732-22ba5bdb127f\",\r\n        \"cantidad\":32\r\n    },\r\n    {\r\n        \"idStock\":\"0d1bbb74-0107-485c-beae-ad1b7a6a6ab8\",\r\n        \"cantidad\":42\r\n    }\r\n]",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/stock/actualizarCantidad",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "stock",
+            "actualizarCantidad"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "guardar solicitud",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"motivoDevolucion\":\"otro\",\r\n    \"motivoCancelacion\":\"otro\",\r\n    \"referencia\":\"ref-1\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/solicitudes/guardar",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "solicitudes",
+            "guardar"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "cambiar estado solicitud",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\":\"24474fdf-35e7-4571-840f-07df5328ecee\",\r\n    \"estadoSolicitud\":\"finalizada\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/solicitudes/cambiarEstado",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "solicitudes",
+            "cambiarEstado"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "guardar categoria",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"idProducto\":\"21290e86-f401-43dc-b565-675b27b4e782\",\r\n    \"caracteristicas\":[\"VINTAGE\",\"PANTALON\"]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/categorias/guardarCategorias",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "categorias",
+            "guardarCategorias"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "eliminar categoria",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/categorias/eliminar/9619e8d3-5b32-42a9-a2bc-770b5642783d",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "categorias",
+            "eliminar",
+            "9619e8d3-5b32-42a9-a2bc-770b5642783d"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "filtrar productos",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nombre\":\"\",\r\n    \"minPrecio\":0,\r\n    \"maxPrecio\":0,\r\n    \"categorias\": [],\r\n    \"descuento\":30,\r\n    \"color\":\"\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/productos/buscar",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "productos",
+            "buscar"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "cambiar activacion",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nombre\":\"camisa oversize\",\r\n    \"precio\":12000,\r\n    \"stock\":[\r\n        {\r\n            \"talla\":\"xl\",\r\n            \"cantidad\":20,\r\n            \"color\":\"blanco\"\r\n        },\r\n        {\r\n            \"talla\":\"m\",\r\n            \"cantidad\":10,\r\n            \"color\":\"blanco\"\r\n        },\r\n        {\r\n            \"talla\":\"xs\",\r\n            \"cantidad\":12,\r\n            \"color\":\"negro\"\r\n        },\r\n        {\r\n            \"talla\":\"m\",\r\n            \"cantidad\":15,\r\n            \"color\":\"negro\"\r\n        }\r\n    ],\r\n    \"categorias\":[\"CAMISA\"]\r\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/productos/cambiarActivacion/2af5d85f-b939-408d-853e-55a93c106de2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "productos",
+            "cambiarActivacion",
+            "2af5d85f-b939-408d-853e-55a93c106de2"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
