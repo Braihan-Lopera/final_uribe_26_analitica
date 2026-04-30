@@ -16,7 +16,7 @@ def limpiar_datos_dataframe(datos_crudos):
     
     df = pd.DataFrame(datos_crudos)
     
-    columnas_texto = df.select_dtypes(include=['object']).columns
+    columnas_texto = df.select_dtypes(include=['object', 'str']).columns
     for col in columnas_texto:
         df[col] = df[col].apply(limpiar_texto)
     

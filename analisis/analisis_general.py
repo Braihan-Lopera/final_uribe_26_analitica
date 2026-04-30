@@ -22,8 +22,13 @@ def armar_respuesta_completa_modular(usuarios, productos, ventas, mensajes, fuen
         "mensajes": mensajes,
         "resumen": resumen,
         "empleados_que_mas_venden": empleados.get("ranking_general", []),
+        "empleados_que_menos_venden": list(reversed(empleados.get("ranking_general", []))),
         "productos_mas_vendidos": productos_analisis.get("productos_analizados", []),
+        "productos_menos_vendidos": list(reversed(productos_analisis.get("productos_analizados", []))),
         "clientes_que_mas_compran": clientes.get("clientes_top_compradores", []),
+        "clientes_que_menos_compran": list(reversed(clientes.get("clientes_top_compradores", []))),
+        "productos_analizados": productos_analisis.get("productos_analizados", []),
+        "clientes_top_compradores": clientes.get("clientes_top_compradores", []),
         "estadisticas": {
             "ventas": safe_serialize(resumen.get("descripcion_estadistica_ventas", {})),
             "empleados": safe_serialize(empleados.get("estadisticas_ventas", {})),

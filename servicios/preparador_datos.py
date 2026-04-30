@@ -24,7 +24,9 @@ def preparar_datos_para_analisis_modular(solicitud):
         ventas_crudas = generar_ventas_simuladas(n=300)
         mensajes.append("Sistema operando con 300 registros simulados de alto rendimiento.")
     elif not ventas_crudas:
-        ventas_crudas, _ = intentar_consumir_ventas()
+        ventas_crudas, ruta_ventas = intentar_consumir_ventas()
+        if ruta_ventas:
+            mensajes.insert(0, f"Ventas cargadas desde {ruta_ventas}.")
 
     # 3. Aplicar Filtro de Vendedores (ANTES del análisis pero DESPUÉS de obtener las ventas)
     if hasattr(solicitud, 'filtros_vendedores') and solicitud.filtros_vendedores.nombre:
@@ -43,5 +45,8 @@ def preparar_datos_para_analisis_modular(solicitud):
     usuarios = normalizar_usuarios(usuarios_crudos)
     productos = normalizar_productos(productos_crudos)
     ventas = normalizar_ventas(ventas_crudas)
+
+    if not ventas:
+        mensajes.append("No se encontraron ventas para analizar.")
 
     return usuarios, productos, ventas, mensajes

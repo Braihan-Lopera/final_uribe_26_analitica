@@ -89,7 +89,12 @@ def analisis_completo(solicitud: SolicitudAnalisis):
 
 @app.post("/analisis/resumen")
 def analisis_resumen_endpoint(solicitud: SolicitudAnalisis):
-    return construir_respuesta_analitica(solicitud) # Usamos el general para consistencia
+    respuesta = construir_respuesta_analitica(solicitud)
+    return {
+        "fuente_backend": respuesta["fuente_backend"],
+        "mensajes": respuesta["mensajes"],
+        "resumen": respuesta["resumen"],
+    }
 
 @app.post("/analisis/empleados")
 def analisis_empleados_endpoint(solicitud: SolicitudAnalisis):
