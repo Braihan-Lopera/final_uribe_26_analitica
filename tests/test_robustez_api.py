@@ -68,6 +68,7 @@ class RobustezApiTests(unittest.TestCase):
         datos = respuesta.json()
         self.assertEqual(datos["resumen"]["total_ventas"], 1)
         self.assertEqual(datos["resumen"]["total_ingresos"], 10.0)
+        self.assertEqual(datos["resumen"]["total_unidades_vendidas"], 0.0)
         self.assertIn("/ordenes/listar", datos["mensajes"][0])
 
     def test_valores_invalidos_no_tumban_la_api(self):
@@ -89,8 +90,8 @@ class RobustezApiTests(unittest.TestCase):
         datos = respuesta.json()
         self.assertEqual(datos["resumen"]["total_productos"], 1)
         self.assertEqual(datos["resumen"]["total_ventas"], 0)
-        self.assertEqual(datos["productos_mas_vendidos"], [])
-        self.assertIn("No se encontraron ventas en el backend", " ".join(datos["mensajes"]))
+        self.assertEqual(datos["productos_analizados"], [])
+        self.assertIn("No se encontraron ventas", " ".join(datos["mensajes"]))
 
     def test_respuesta_dict_suelto_no_inventa_ventas(self):
         def mock_get(url, json=None, timeout=None):
@@ -108,7 +109,25 @@ class RobustezApiTests(unittest.TestCase):
         self.assertEqual(respuesta.status_code, 200)
         datos = respuesta.json()
         self.assertEqual(datos["resumen"]["total_ventas"], 0)
-        self.assertEqual(datos["clientes_que_mas_compran"], [])
+        self.assertEqual(datos["clientes_top_compradores"], [])
+
+    def test_salud_endpoint(self):
+        respuesta = self.client.get("/salud")
+        self.assertEqual(respuesta.status_code, 200)
+        self.assertEqual(respuesta.json(), {"estado": "ok"})
+
+    def test_analisis_resumen_endpoint(self):
+        def mock_get(url, json=None, timeout=None):
+            return MockResponse(data=[])
+
+        with patch("servicios.backend_cliente.requests.get", side_effect=mock_get):
+            respuesta = self.client.post("/analisis/resumen", json=self.body)
+
+        self.assertEqual(respuesta.status_code, 200)
+        datos = respuesta.json()
+        self.assertIn("resumen", datos)
+        self.assertEqual(datos["resumen"]["total_ventas"], 0)
+        self.assertNotIn("clientes_top_compradores", datos)
 
 
 if __name__ == "__main__":

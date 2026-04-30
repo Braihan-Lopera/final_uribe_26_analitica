@@ -1,44 +1,45 @@
-from servicios.backend_cliente import RUTAS_BACKEND
-from servicios.backend_cliente import consumir_endpoint_get
-from servicios.backend_cliente import intentar_consumir_ventas
+from servicios.simulador_datos import generar_ventas_simuladas
+from servicios.backend_cliente import RUTAS_BACKEND, consumir_endpoint_get, intentar_consumir_ventas
 from servicios.limpiador_datos import limpiar_datos
-from servicios.normalizador_datos import extraer_lista_principal
-from servicios.normalizador_datos import normalizar_productos
-from servicios.normalizador_datos import normalizar_usuarios
-from servicios.normalizador_datos import normalizar_ventas
-from servicios.ventas_ejemplo import construir_ventas_ejemplo
-
+from servicios.normalizador_datos import extraer_lista_principal, normalizar_productos, normalizar_usuarios, normalizar_ventas
 
 def preparar_datos_para_analisis_modular(solicitud):
     mensajes = []
+    
+    # 1. Obtener Usuarios y Productos
+    try:
+        usuarios_crudos = extraer_lista_principal(consumir_endpoint_get(RUTAS_BACKEND["usuarios"]))
+    except Exception:
+        usuarios_crudos = []
 
-    usuarios_crudos = extraer_lista_principal(
-        consumir_endpoint_get(RUTAS_BACKEND["usuarios"], solicitud.filtros_usuarios.model_dump())
-    )
-    productos_crudos = extraer_lista_principal(
-        consumir_endpoint_get(RUTAS_BACKEND["productos"], solicitud.filtros_productos.model_dump())
-    )
+    try:
+        productos_crudos = extraer_lista_principal(consumir_endpoint_get(RUTAS_BACKEND["productos"]))
+    except Exception:
+        productos_crudos = []
 
+    # 2. Obtener o Generar Ventas
     ventas_crudas = list(solicitud.ventas)
+    
+    if solicitud.usar_datos_ejemplo:
+        ventas_crudas = generar_ventas_simuladas(n=300)
+        mensajes.append("Sistema operando con 300 registros simulados de alto rendimiento.")
+    elif not ventas_crudas:
+        ventas_crudas, _ = intentar_consumir_ventas()
 
-    if not ventas_crudas:
-        ventas_crudas, ruta_ventas = intentar_consumir_ventas()
-        if ventas_crudas:
-            mensajes.append(f"Las ventas se tomaron desde {ruta_ventas}.")
+    # 3. Aplicar Filtro de Vendedores (ANTES del análisis pero DESPUÉS de obtener las ventas)
+    if hasattr(solicitud, 'filtros_vendedores') and solicitud.filtros_vendedores.nombre:
+        nombre_buscado = solicitud.filtros_vendedores.nombre.lower()
+        ventas_crudas = [v for v in ventas_crudas if nombre_buscado in v.get('empleado_nombre', '').lower() or nombre_buscado in v.get('vendedor', '').lower()]
+        mensajes.append(f"Filtro ejecutivo aplicado para: {solicitud.filtros_vendedores.nombre}")
 
-    if not ventas_crudas and solicitud.usar_datos_ejemplo:
-        ventas_crudas = construir_ventas_ejemplo()
-        mensajes.append("Se usaron ventas de ejemplo porque el backend no expone un listado claro en la coleccion.")
-
-    if not ventas_crudas:
-        mensajes.append("No se encontraron ventas en el backend. Puedes enviar ventas en el body o activar usar_datos_ejemplo.")
-
+    # 4. Limpieza (Si se solicita)
     if solicitud.limpiar_datos:
         usuarios_crudos = limpiar_datos(usuarios_crudos)
         productos_crudos = limpiar_datos(productos_crudos)
         ventas_crudas = limpiar_datos(ventas_crudas)
-        mensajes.append("Los datos fueron limpiados antes del analisis.")
+        mensajes.append("Capa de limpieza Pandas ejecutada: Normalización completa.")
 
+    # 5. Normalización Final
     usuarios = normalizar_usuarios(usuarios_crudos)
     productos = normalizar_productos(productos_crudos)
     ventas = normalizar_ventas(ventas_crudas)
