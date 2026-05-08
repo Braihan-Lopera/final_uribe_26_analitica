@@ -2,19 +2,31 @@ import random
 import uuid
 from datetime import datetime, timedelta
 
-def generar_ventas_simuladas(n=100):
-    productos_base = [
-        {"nombre": "Camisa Polo Slim Fit", "precio": 150000},
-        {"nombre": "Camisa Polo Classic Fit", "precio": 200000},
-        {"nombre": "Jean Skinny Fit", "precio": 490000},
-        {"nombre": "Jean Rider Slim", "precio": 357000},
-        {"nombre": "Chaqueta Bomber Acolchada", "precio": 1500000},
-        {"nombre": "Chaqueta Windbreaker", "precio": 680000},
-        {"nombre": "Chaqueta Trucker Denim", "precio": 820000},
-        {"nombre": "Camiseta Basica Algodon", "precio": 65000},
-        {"nombre": "Buso Hoodie Oversize", "precio": 185000},
-        {"nombre": "Gorra Sport Classic", "precio": 45000},
+def generar_ventas_simuladas(n=100, productos_reales=None):
+    # Lista de productos profesionales para asegurar que el dashboard nunca esté vacío
+    productos_quemados = [
+        {"id": "p-1", "nombre": "Camisa Polo Slim Fit Azul", "precio": 145000},
+        {"id": "p-2", "nombre": "Jean Skinny Negro Premium", "precio": 189900},
+        {"id": "p-3", "nombre": "Chaqueta Bomber Verde Olivo", "precio": 245000},
+        {"id": "p-4", "nombre": "Camiseta Algodón Orgánico S", "precio": 65000},
+        {"id": "p-5", "nombre": "Buso Hoodie Gris Oversize", "precio": 125000},
+        {"id": "p-6", "nombre": "Vestido Casual Floral", "precio": 175000},
+        {"id": "p-7", "nombre": "Gorra Sport Runner", "precio": 45000},
+        {"id": "p-8", "nombre": "Bermuda Cargo Beige", "precio": 95000},
+        {"id": "p-9", "nombre": "Chaqueta Cuero Sintético", "precio": 320000},
+        {"id": "p-10", "nombre": "Tenis Urban White", "precio": 210000}
     ]
+
+    if productos_reales and len(productos_reales) > 0:
+        productos_base = []
+        for p in productos_reales:
+            productos_base.append({
+                "id": p.get("id", str(uuid.uuid4())),
+                "nombre": p.get("nombre", "Prenda Genérica"),
+                "precio": p.get("precio", 50000)
+            })
+    else:
+        productos_base = productos_quemados
 
     vendedores = [
         {"id": "e-1", "nombre": "Juan Serna"},

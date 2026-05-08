@@ -12,11 +12,19 @@ def analizar_productos_modular(ventas):
 
     registros_productos = []
     for v in ventas:
-        for p in v.get('productos', []):
-            p['venta_id'] = v.get('id')
-            registros_productos.append(p)
+        prods_de_venta = v.get('productos', [])
+        if isinstance(prods_de_venta, list):
+            for p in prods_de_venta:
+                if isinstance(p, dict):
+                    # Crear copia para no mutar el original y asegurar campos
+                    item = p.copy()
+                    item['venta_id'] = v.get('id')
+                    registros_productos.append(item)
             
     if not registros_productos:
+        print(f"DEBUG: No se extrajeron productos de {len(ventas)} ventas.")
+        if len(ventas) > 0:
+            print(f"DEBUG: Ejemplo de primer venta: {ventas[0].keys()}")
         return {
             "productos_analizados": [],
             "productos_populares": [],

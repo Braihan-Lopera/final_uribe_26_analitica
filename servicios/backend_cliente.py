@@ -2,8 +2,9 @@ import os
 import requests
 from fastapi import HTTPException
 from servicios.normalizador_datos import extraer_lista_principal
+import os
 
-URL_BACKEND = os.getenv("URL_BACKEND", "http://localhost:8080")
+URL_BACKEND = os.getenv("URL_BACKEND", "http://127.0.0.1:8080")
 TIMEOUT_BACKEND = int(os.getenv("TIMEOUT_BACKEND", "10"))
 
 RUTAS_BACKEND = {
